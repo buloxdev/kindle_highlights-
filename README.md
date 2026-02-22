@@ -18,6 +18,8 @@ cp .env.example .env
 WEEKLY_HIGHLIGHT_EMAIL=you@example.com
 ```
 
+For scheduled automations, prefer Keychain (`kindle_highlights.weekly_email.to`) because `.env` is not included in clean worktrees.
+
 3. Run initial Kindle login once (interactive):
 
 ```bash
