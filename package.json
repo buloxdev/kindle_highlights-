@@ -1,0 +1,16 @@
+{
+  "name": "kindle_highlights",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Download Kindle highlights to local Markdown and send weekly random highlight emails.",
+  "scripts": {
+    "kindle:scrape": "node src/cli.mjs scrape",
+    "kindle:parse-email": "node src/cli.mjs parse-email",
+    "weekly:preview-highlight": "node src/cli.mjs weekly-email",
+    "weekly:email-highlight": "node src/cli.mjs weekly-email --send"
+  },
+  "dependencies": {
+    "playwright": "^1.51.0"
+  }
+}
