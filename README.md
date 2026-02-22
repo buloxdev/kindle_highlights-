@@ -2,6 +2,45 @@
 
 Local tool to export Kindle highlights into Markdown files and email one random highlight weekly.
 
+## Quick Start
+
+1. Install dependencies:
+
+```bash
+npm install
+npx playwright install chromium
+cp .env.example .env
+```
+
+2. Set your weekly recipient in `.env` (or use Keychain):
+
+```env
+WEEKLY_HIGHLIGHT_EMAIL=you@example.com
+```
+
+3. Run initial Kindle login once (interactive):
+
+```bash
+npm run kindle:scrape -- --headed
+```
+
+4. Run normal syncs (headless):
+
+```bash
+npm run kindle:scrape -- --headless
+```
+
+5. Test weekly email:
+
+```bash
+npm run weekly:preview-highlight
+npm run weekly:email-highlight
+```
+
+6. Schedule it weekly (example):
+- Monday at 07:00 AM local time
+- command: `npm run weekly:email-highlight`
+
 ## What this includes
 
 - `scrape` mode:
