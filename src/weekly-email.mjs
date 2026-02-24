@@ -5,6 +5,7 @@ import { promisify } from "node:util";
 
 import { loadDotEnv } from "./lib/utils.mjs";
 import { resolveWeeklyEmailRecipient } from "./lib/keychain.mjs";
+import { generateWeeklyInsights } from "./lib/weekly-insights.mjs";
 
 const execFileAsync = promisify(execFile);
 
@@ -25,10 +26,12 @@ export async function runWeeklyHighlightEmail({ outDir, recipientOverride, send 
 
   const picked = highlights[Math.floor(Math.random() * highlights.length)];
   const subject = `Weekly Kindle Highlight: ${picked.bookTitle}`;
-  const body = formatEmailBody(picked);
+  const insights = generateWeeklyInsights(picked);
+  const body = formatEmailBody(picked, insights);
 
   console.log(`[info] Picked highlight from "${picked.bookTitle}" (${picked.fileName}).`);
   console.log(`[info] Recipient source: ${recipientInfo.source}`);
+  console.log(`[info] Insight theme: ${insights.meta.primaryTheme}`);
 
   if (!send) {
     console.log("[preview] --send not provided. Showing email draft only.");
@@ -123,7 +126,7 @@ function isMeaningfulQuote(quote) {
   return compact.length >= 8;
 }
 
-function formatEmailBody(item) {
+export function formatEmailBody(item, insights) {
   const parts = [];
   parts.push(`"${item.quote}"`);
   parts.push("");
@@ -131,6 +134,11 @@ function formatEmailBody(item) {
   if (item.author) parts.push(`Author: ${item.author}`);
   if (item.location) parts.push(`Location: ${item.location}`);
   if (item.addedAt) parts.push(`Added: ${item.addedAt}`);
+  parts.push("");
+  parts.push("This Week's Ideas");
+  parts.push(`- Action: ${insights.action}`);
+  parts.push(`- Reflect: ${insights.reflection}`);
+  parts.push(`- Watch-out: ${insights.caution}`);
   parts.push("");
   parts.push("Sent by kindle_highlights weekly automation.");
   return parts.join("\n");

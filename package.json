@@ -8,7 +8,8 @@
     "kindle:scrape": "node src/cli.mjs scrape",
     "kindle:parse-email": "node src/cli.mjs parse-email",
     "weekly:preview-highlight": "node src/cli.mjs weekly-email",
-    "weekly:email-highlight": "node src/cli.mjs weekly-email --send"
+    "weekly:email-highlight": "node src/cli.mjs weekly-email --send",
+    "test": "node --test src/lib/weekly-insights.test.mjs"
   },
   "dependencies": {
     "playwright": "^1.51.0"

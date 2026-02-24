@@ -32,7 +32,7 @@ npm run kindle:scrape -- --headed
 npm run kindle:scrape -- --headless
 ```
 
-5. Test weekly email:
+5. Test weekly email (includes 3 locally generated ideas: Action, Reflect, Watch-out):
 
 ```bash
 npm run weekly:preview-highlight
@@ -56,6 +56,7 @@ npm run weekly:email-highlight
   - Writes grouped Markdown files by book.
 - `weekly-email` mode:
   - Picks one random highlight from `output/highlights/*.md`.
+  - Adds 3 locally generated insights (Action, Reflect, Watch-out) based on the quote.
   - Sends it via Apple Mail (macOS) or previews the draft in terminal.
 
 ## Setup
